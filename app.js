@@ -49,16 +49,11 @@ app.get("/", function(req, res) {
 
 app.post("/", function(req, res){
   const item = req.body.newItem;
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    const newItem = new Item({
-      name: item
-    })
-    newItem.save();
-    res.redirect("/");
-  }
+  const newItem = new Item({
+    name: item
+  })
+  newItem.save();
+  res.redirect("/");
 });
 
 app.post("/delete",function(req,res){
@@ -66,21 +61,11 @@ app.post("/delete",function(req,res){
     if(err) {
       console.log(err);
     } else{
-      console.log("Successfully deleted");
       res.redirect("/");
     }
   })
 })
 
-app.get("/about", function(req, res){
-  res.render("about");
-});
-
-
-let port = process.env.PORT;
-if(port==null || port == "") {
-  port=3000;
-} 
-app.listen(port, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server has started successfully");
 });
