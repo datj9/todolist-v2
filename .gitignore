@@ -2,3 +2,6 @@
 npm-debug.log
 .DS_Store
 /*.env
+README.md
+style.css.map
+style.scss

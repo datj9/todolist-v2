@@ -19,20 +19,20 @@ const itemSchema = {
 const Item = mongoose.model("Item",itemSchema);
 
 const item1 = new Item({
-  name: "Cook Food"
+  name: "Go to the supermarket"
 })
 const item2 = new Item({
   name: "Buy Food"
 })
 const item3 = new Item({
-  name: "Eat Food"
+  name: "Cook dinner"
 })
 const defaultItems = [item1,item2,item3];
 
-
-
 app.get("/", function(req, res) {
+  // Find in Item collection
   Item.find({},function(err, foundItems){
+    // Render defaultItems if foundItems doesn't have any item
     if(foundItems.length==0) {
       Item.insertMany(defaultItems,function(err){
         if(err) {
@@ -71,7 +71,6 @@ app.post("/delete",function(req,res){
     }
   })
 })
-
 
 app.get("/about", function(req, res){
   res.render("about");
